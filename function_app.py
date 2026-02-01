@@ -47,7 +47,7 @@ def recruitercopilot(req: func.HttpRequest) -> func.HttpResponse:
 
 def fetch_job_descriptions():
     connection_string = os.getenv('SQL_CONNECTION_STRING')
-    query = "SELECT JobID, Description FROM Reckitt_Sample_JobPosting"
+    query = "SELECT JobID, Description FROM JobPostings"
     with pyodbc.connect(connection_string) as conn:
         cursor = conn.cursor()
         cursor.execute(query)
@@ -55,7 +55,7 @@ def fetch_job_descriptions():
 
 def fetch_job_description_by_id(job_id):
     connection_string = os.getenv('SQL_CONNECTION_STRING')
-    query = "SELECT JobID, Description FROM Reckitt_Sample_JobPosting WHERE JobID = ?"
+    query = "SELECT JobID, Description FROM JobPostings WHERE JobID = ?"
     with pyodbc.connect(connection_string) as conn:
         cursor = conn.cursor()
         cursor.execute(query, (job_id,))
@@ -114,7 +114,7 @@ def process_job_description_only(draft_description):
     - Format: Use bullet points, maintain a consistent layout, and apply visual hierarchy techniques like font sizes and bolding to guide the reader.
        """
 
-    prompt = f"You are HR Copoilot, your job is to help the recruiter improve and write job advertisement for Reckitt. The user will provide draft job description,  Please assess and score their job description from 1 to 5 based on these criteria: {assessment_criteria}."
+    prompt = f"You are HR Copilot, your job is to help recruiters improve and write job advertisements. The user will provide a draft job description. Please assess and score their job description from 1 to 5 based on these criteria: {assessment_criteria}."
 
     openai.api_type = "azure"
     openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT") 

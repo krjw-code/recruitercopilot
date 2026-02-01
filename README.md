@@ -52,7 +52,7 @@ This function assesses and scores job descriptions based on best practices for:
 
 ## Database Schema
 
-The function queries a `Reckitt_Sample_JobPosting` table with columns:
+The function queries a `JobPostings` table with columns:
 - `JobID` - Unique job identifier
 - `Description` - Job description text
 
